@@ -1,0 +1,36 @@
+version: '3'
+services:
+  flask-app:
+    image: dihafdo/grade-submission-portal
+    container_name: flask-app
+    ports:
+      - "5001:5001"
+    environment:
+      - GRADE_SERVICE_HOST=node-server
+    depends_on:
+      - node-server
+
+  node-server:
+    image: dihafdo/grade-submission-api
+    container_name: node-server
+    environment:
+      - DB_HOST=mongo
+      - DB_PORT=27017
+      - DB_NAME=grade_db
+    ports:
+      - "3000:3000"
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=grade_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data/data/db
+volumes:
+  mongo-data:
+
+#docker compose up
+#docker compose down
