@@ -1,0 +1,12 @@
+- build image from Dockerfile
+
+docker build -t python-app .
+
+
+- run container from image
+
+docker run --rm --name python-app-container python-app
+
+- if we need to go in the container
+
+docker run -it --rm --name python-app-container python-app /bin/sh
