@@ -1,0 +1,19 @@
+- Build Node server
+
+docker build -t dihafdo/grade-submission-api .
+
+
+- Build Flask App
+
+docker build -t dihafdo/grade-submission-portal .
+
+- Create A Network
+
+docker network create  my-network
+
+
+- Run The Containers with Enverments
+
+docker run --rm --name node-server --network my-network -p 3000:3000 dihafdo/grade-submission-api
+
+docker run --rm --name Flask-app --network my-network -p 5001:5001 -e GRADE_SERVICE_HOST=node-server dihafdo/grade-submission-portal
