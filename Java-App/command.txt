@@ -1,0 +1,12 @@
+- build image from Dockerfile
+
+docker build -t java-app .
+
+
+- run container from image
+
+docker run --rm --name java-app-container java-app
+
+- if we need to go in the container
+
+docker run -it --rm --name java-app-container java-app /bin/sh
